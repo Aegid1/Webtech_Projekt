@@ -11,10 +11,12 @@ public class Controller {
     @GetMapping("/")
 	public String index(){ return "Hello World!"; }
     
-    @RequestMapping(path="/test/")
-    public String queryParameter(@RequestParam("name") String name){
-        return name;
-    }
+    @RequestMapping(path="/test/mohamed/aegid/")
+    public String queryParameter(@RequestParam("user") String name){
 
+        return name;
+
+    }   
+    
 
 }
