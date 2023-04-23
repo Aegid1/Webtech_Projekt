@@ -15,7 +15,7 @@ public class DataBase {
 
     public static void readDB() {
         String tab = "TESTTABELLE";
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/.javabeginners/h2Test", "", "")) {
+        try (Connection conn = DriverManager.getConnection("", "Agomo", "Mogidius")) {
             DatabaseMetaData md = conn.getMetaData();
 
             String[] types = { "TABLE", "SYSTEM TABLE" };
