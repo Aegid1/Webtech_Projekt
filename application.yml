@@ -1,10 +1,10 @@
 spring:
   datasource:
-      url: spring.datasource.url=jdbc:h2:file:./DataBase
-      # this url is for saving the database in to the project itself
-      username: Agomo
-      password: Mogidius
-      driverClassName: org.h2.Driver
+      # use environment variables instead of actual values -> data protection
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driverClassName: org.h2.Driver
   h2:
     console:
       enabled: true
@@ -19,7 +19,7 @@ spring:
     show-sql: false # Set true for debugging
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-    ddl-auto: update # (create, create-drop, validate, update)
+      ddl-auto: update # (create, create-drop, validate, update)
     open-in-view: false
   sql:
     init:
