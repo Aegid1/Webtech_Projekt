@@ -15,7 +15,7 @@ public class Controller {
     public String queryParameter(@RequestParam("user") String name){
 
         return name;
-
+    
     }   
     
 
