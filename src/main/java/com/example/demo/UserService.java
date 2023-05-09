@@ -9,11 +9,11 @@ public class UserService {
     @Autowired
     UserRepository repo;
 
-    public User saveUser(User user){ return repo.save(user); }
+    public UserEntity saveUser(UserEntity user){ return repo.save(user); }
 
-    public void deleteUser(User user){ repo.delete(user); }
+    public void deleteUser(UserEntity user){ repo.delete(user); }
 
-    public User findUserByID(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }   
+    public UserEntity findUserByID(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }   
     
     
 }
