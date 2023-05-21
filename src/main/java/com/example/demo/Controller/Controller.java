@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +11,11 @@ public class Controller {
     @GetMapping("/")
 	public String index(){ return "Hello World!"; }
     
-    @RequestMapping(path="/test/mohamed/aegid/")
+    @GetMapping(path="/test/mohamed/aegid/")
     public String queryParameter(@RequestParam("user") String name){
 
         return name;
     
     }   
-    
 
 }

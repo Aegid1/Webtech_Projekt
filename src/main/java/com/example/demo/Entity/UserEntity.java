@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,10 @@ public class UserEntity {
     
     @Column
     private String password;
+    //hier muss noch ein Foreign-Key auf eine GroupEntity zeigen
 
+
+    //ich weiß gar nicht warum aber ich glaube man braucht immer nur einen Standard-Konstruktor
     public UserEntity(){}
 
     public Long getId() { return id; }
