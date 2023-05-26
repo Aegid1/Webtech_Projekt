@@ -22,6 +22,9 @@ public class UserEntity {
     private String password;
     //hier muss noch ein Foreign-Key auf eine GroupEntity zeigen
 
+    @Column
+    private String profilPicture;
+
     @OneToOne
     @JoinColumn(name = "fk_toDoList_id")
     private ToDoListEntity fk_toDoList_id;

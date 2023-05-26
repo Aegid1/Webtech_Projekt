@@ -20,9 +20,14 @@ public class ToDoEntity {
     @Column
     private Date deadline;
 
+    @Column
+    private Date creationDate;
+
 //hier wirklich nur der Name der Person, oder person selber?
     @Column
     private String nameOfResponsiblePerson;
+
+    // mit Taskstatus noch verknüpfen
 
     @ManyToOne
     @JoinColumn(name = "toDoListId")

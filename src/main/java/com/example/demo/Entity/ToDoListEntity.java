@@ -13,7 +13,9 @@ public class ToDoListEntity {
     private Long toDoListId;
 
     @Column
-    private List<ToDoListEntity> toDos;
+    private List<ToDoEntity> toDos;
+
+    private final String name = "Aufgaben";
 
     @OneToMany
     @JoinColumn(name = "fk_toDoEntity_id")

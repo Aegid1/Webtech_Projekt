@@ -18,13 +18,11 @@ public class GroupEntity {
 
     // Inwiefern notwendig ergibt sich aus weiterer Arbeit
     @Column
-    private int anzahl;
+    private int countOfMembers;
 
     //eventuell byte[] statt String
     @Column
-    private String profilbild;
-
-    @Colummn
+    private String profilePicture;
 
     @ManyToOne
     @JoinColumn(name = "fk_userEntity_id")
