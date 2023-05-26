@@ -1,10 +1,6 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class UserEntity {
@@ -25,6 +21,10 @@ public class UserEntity {
     @Column
     private String password;
     //hier muss noch ein Foreign-Key auf eine GroupEntity zeigen
+
+    @OneToOne
+    @JoinColumn(name = "fk_toDoList_id")
+    private ToDoListEntity fk_toDoList_id;
 
 
     //ich weiß gar nicht warum aber ich glaube man braucht immer nur einen Standard-Konstruktor

@@ -2,10 +2,7 @@ package com.example.demo.Entity;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 public class GroupEntity {
     
@@ -15,5 +12,9 @@ public class GroupEntity {
 
     @Column
     private List<UserEntity> members;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_userEntity_id")
+    private Long fk_userEntity_id;
 
 }
