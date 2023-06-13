@@ -3,6 +3,10 @@ package com.example.demo.Service;
 import com.example.demo.Repository.ToDoRepository;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.Entity.ToDoEntity;
+import com.example.demo.Entity.ToDoListEntity;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

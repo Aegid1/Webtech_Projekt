@@ -17,6 +17,7 @@ public class ToDoListEntity {
 
     private final String name = "Aufgaben";
 
+    //warum enthält hier TodoList eine weitere TodoList?
     @OneToMany
     @JoinColumn(name = "fk_toDoEntity_id")
     private Long fk_toDoListEntity_id;
