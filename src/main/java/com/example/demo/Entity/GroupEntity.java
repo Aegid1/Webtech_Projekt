@@ -1,17 +1,16 @@
 package com.example.demo.Entity;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
+@Entity
 public class GroupEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
-    private List<UserEntity> members;
+    private Long groupId;
 
     @Column
     private String name;
@@ -24,8 +23,11 @@ public class GroupEntity {
     @Column
     private String profilePicture;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_userEntity_id")
-    private Long fk_userEntity_id;
+    @OneToMany(mappedBy = "fkGroupId")
+    private List<UserEntity> fkUserID;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "toDoListId")
+    private ToDoListEntity fkToDoListId;
 
 }

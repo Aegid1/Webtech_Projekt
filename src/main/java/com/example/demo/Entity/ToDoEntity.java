@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
+@Entity
 public class ToDoEntity {
 
     @Id
@@ -14,24 +15,25 @@ public class ToDoEntity {
     @Column
     private String name;
 
-    @Column
-    private String description;
+    // @Column
+    // private String description;
 
     @Column
     private Date deadline;
 
-    @Column
-    private Date creationDate;
+    // @Column
+    // private Date creationDate;
 
 //hier wirklich nur der Name der Person, oder person selber?
-    @Column
-    private String nameOfResponsiblePerson;
+    // @Column
+    // private String nameOfResponsiblePerson;
 
     // mit Taskstatus noch verknüpfen
 
     @ManyToOne
     @JoinColumn(name = "toDoListId")
-    private Long fk_toDoListEntity_id;
+    private ToDoListEntity fkToDoListEntityID;
 
-
+    public void setForeignKey(ToDoListEntity toDoList){ this.fkToDoListEntityID = toDoList; }
+    
 }

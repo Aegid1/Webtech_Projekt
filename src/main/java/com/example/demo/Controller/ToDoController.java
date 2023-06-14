@@ -11,12 +11,9 @@ public class ToDoController {
 
     @Autowired
     ToDoService toDoService;
-//hier noch PostMapping ändern
-    @PostMapping("/registration")
-    public ToDoEntity createToDo(@RequestBody ToDoEntity toDo){
 
-        return toDoService.saveToDo(toDo);
-    }
+    @PostMapping("/todo/{id}")
+    public ToDoEntity createToDo(@RequestBody ToDoEntity toDo, @PathVariable String id){ return toDoService.saveToDo(toDo, Long.parseLong(id)); }
 
     @GetMapping("/todo/{id}")
     public ToDoEntity getToDo(@PathVariable String id) { return toDoService.findToDoByID(Long.parseLong(id)); }

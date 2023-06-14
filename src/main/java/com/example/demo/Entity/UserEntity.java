@@ -1,13 +1,15 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+// import javax.persistence.*;
+
 
 @Entity
 public class UserEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userEntityId;
     
     @Column
     private String firstname;
@@ -25,15 +27,11 @@ public class UserEntity {
     @Column
     private String profilPicture;
 
-    @OneToOne
-    @JoinColumn(name = "fk_toDoList_id")
-    private ToDoListEntity fk_toDoList_id;
+    @ManyToOne
+    @JoinColumn(name = "groupId")
+    private GroupEntity fkGroupId;
 
-
-    //ich weiß gar nicht warum aber ich glaube man braucht immer nur einen Standard-Konstruktor
-    public UserEntity(){}
-
-    public Long getId() { return id; }
+    public Long getId() { return userEntityId; }
 
     public String getFirstname() { return firstname; }
 
