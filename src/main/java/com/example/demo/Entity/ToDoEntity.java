@@ -30,10 +30,23 @@ public class ToDoEntity {
 
     // mit Taskstatus noch verknüpfen
 
-    @ManyToOne
-    @JoinColumn(name = "toDoListId")
-    private ToDoListEntity fkToDoListEntityID;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "toDoListId")
+    // private ToDoListEntity toDoListId;
 
-    public void setForeignKey(ToDoListEntity toDoList){ this.fkToDoListEntityID = toDoList; }
+    // public void setForeignKey(ToDoListEntity toDoList){ this.toDoListId = toDoList; }
+
+    public Long getId() { return id; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public Date getDeadline() { return deadline; }
+
+    public void setDeadline(Date deadline) { this.deadline = deadline; }
+
+    // public ToDoListEntity getToDoListId() { return toDoListId; }
+    
     
 }

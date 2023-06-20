@@ -25,12 +25,16 @@ public class ToDoService {
         
         //Dieser Teil kümmert sich darum die Spalte der ToDoList zu updaten
         Optional<ToDoListEntity> toDoList = listRepo.findById(id);
-        toDoList.get().addToDoEntity(toDo);
+        // toDoList.get().addToDoEntity(toDo);
         listRepo.save(toDoList.get());
 
         //Dieser Teil kümmert sich darum das tatsächliche toDo abzuspeichern
-        toDo.setForeignKey(toDoList.get());
-        return repo.save(toDo); 
+        // toDo.setForeignKey(toDoList.get());
+        return repo.save(toDo);
+    }
+
+    public List<ToDoEntity> getTodosByListId(Long todoListId) {
+        return repo.findByToDoListId(todoListId);
     }
 
     public void deleteToDo(ToDoEntity toDo){ repo.delete(toDo); }

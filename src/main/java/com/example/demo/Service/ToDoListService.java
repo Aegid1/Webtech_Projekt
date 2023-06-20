@@ -5,7 +5,9 @@ import com.example.demo.Entity.ToDoListEntity;
 import com.example.demo.Repository.ToDoListRepository;
 import com.example.demo.Repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ToDoListService {
 
     @Autowired

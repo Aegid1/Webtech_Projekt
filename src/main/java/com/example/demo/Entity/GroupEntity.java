@@ -1,8 +1,6 @@
 package com.example.demo.Entity;
 
 import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -27,7 +25,7 @@ public class GroupEntity {
     private List<UserEntity> fkUserID;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "toDoListId")
+    @JoinColumn(name = "toDoListId", nullable = true)
     private ToDoListEntity fkToDoListId;
 
 }
