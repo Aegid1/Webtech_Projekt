@@ -21,23 +21,21 @@ public class ToDoService {
     @Autowired
     ToDoListRepository listRepo;
 
-    public ToDoEntity saveToDo(ToDoEntity toDo, Long id){ 
-        
-        //Dieser Teil kümmert sich darum die Spalte der ToDoList zu updaten
-        Optional<ToDoListEntity> toDoList = listRepo.findById(id);
+    // public ToDoEntity saveToDo(ToDoEntity toDo, Long id){ 
+        // 
+        // Dieser Teil kümmert sich darum die Spalte der ToDoList zu updaten
+        // Optional<ToDoListEntity> toDoList = listRepo.findById(id);
         // toDoList.get().addToDoEntity(toDo);
-        listRepo.save(toDoList.get());
-
-        //Dieser Teil kümmert sich darum das tatsächliche toDo abzuspeichern
+        // listRepo.save(toDoList.get());
+// 
+        // Dieser Teil kümmert sich darum das tatsächliche toDo abzuspeichern
         // toDo.setForeignKey(toDoList.get());
-        return repo.save(toDo);
-    }
+        // return repo.save(toDo);
+    // }
 
-    public List<ToDoEntity> getTodosByListId(Long todoListId) {
-        return repo.findByToDoListId(todoListId);
-    }
+    public List<ToDoEntity> getTodosByListId(Long todoListId) { return repo.findByToDoListId(todoListId); }
 
-    public void deleteToDo(ToDoEntity toDo){ repo.delete(toDo); }
+    public void deleteToDo(Long id){ repo.deleteById(id); }
 
     public ToDoEntity findToDoByID(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }
 

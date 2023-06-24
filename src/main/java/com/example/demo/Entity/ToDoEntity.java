@@ -15,26 +15,17 @@ public class ToDoEntity {
     @Column
     private String name;
 
-    // @Column
-    // private String description;
-
     @Column
     private Date deadline;
 
-    // @Column
-    // private Date creationDate;
+    @Transient
+    private String date;
 
 //hier wirklich nur der Name der Person, oder person selber?
     // @Column
     // private String nameOfResponsiblePerson;
 
     // mit Taskstatus noch verknüpfen
-
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "toDoListId")
-    // private ToDoListEntity toDoListId;
-
-    // public void setForeignKey(ToDoListEntity toDoList){ this.toDoListId = toDoList; }
 
     public Long getId() { return id; }
 
@@ -46,7 +37,8 @@ public class ToDoEntity {
 
     public void setDeadline(Date deadline) { this.deadline = deadline; }
 
-    // public ToDoListEntity getToDoListId() { return toDoListId; }
-    
+    public String getDate() { return date; }
+
+    public void setDate(String date) { this.date = date; }
     
 }
