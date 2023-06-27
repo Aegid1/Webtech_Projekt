@@ -17,10 +17,7 @@ public class UserController {
     UserService uService;
 
     @PostMapping("/registration")
-    public UserEntity createUser(@RequestBody UserEntity user){
-
-        return uService.saveUser(user);
-    }
+    public UserEntity createUser(@RequestBody UserEntity user){ return uService.saveUser(user); }
 
     @GetMapping("/user/{id}")
     public UserEntity getUser(@PathVariable String id) { return uService.findUserByID(Long.parseLong(id)); }
