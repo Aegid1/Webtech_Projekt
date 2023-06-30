@@ -1,12 +1,26 @@
 package com.example.demo.Entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.*;
 // import javax.persistence.*;
 
-
 @Entity
-public class UserEntity {
+public class UserEntity implements UserDetails{
     
+    public UserEntity(String firstname, String lastname, String email, String password, Role role){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userEntityId;
@@ -22,10 +36,12 @@ public class UserEntity {
     
     @Column
     private String password;
-    //hier muss noch ein Foreign-Key auf eine GroupEntity zeigen
 
     @Column
     private String profilPicture;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "groupId")
@@ -44,9 +60,40 @@ public class UserEntity {
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
-
+    
+    @Override
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
