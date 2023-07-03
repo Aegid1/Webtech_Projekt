@@ -40,12 +40,11 @@ public class UserEntity implements UserDetails{
     @Column
     private String profilPicture;
 
+    @Column
+    private String score;
+
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @ManyToOne
-    @JoinColumn(name = "groupId")
-    private GroupEntity fkGroupId;
 
     public Long getId() { return userEntityId; }
 

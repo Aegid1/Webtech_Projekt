@@ -21,8 +21,11 @@ public class GroupEntity {
     @Column
     private String profilePicture;
 
-    @OneToMany(mappedBy = "fkGroupId")
-    private List<UserEntity> fkUserID;
+    @Column
+    private String scoreSum;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<UserEntity> users;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "toDoListId", nullable = true)
