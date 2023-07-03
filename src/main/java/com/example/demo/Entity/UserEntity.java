@@ -47,6 +47,10 @@ public class UserEntity implements UserDetails{
     @JoinColumn(name = "groupId")
     private GroupEntity fkGroupId;
 
+    public UserEntity() {
+
+    }
+
     public Long getId() { return userEntityId; }
 
     public String getFirstname() { return firstname; }
