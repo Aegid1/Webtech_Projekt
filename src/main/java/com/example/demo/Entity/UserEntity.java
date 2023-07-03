@@ -46,8 +46,6 @@ public class UserEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-<<<<<<< HEAD
-=======
     @ManyToOne
     @JoinColumn(name = "groupId")
     private GroupEntity fkGroupId;
@@ -56,7 +54,6 @@ public class UserEntity implements UserDetails{
 
     }
 
->>>>>>> 1f81ed66c04e1cf9aebfe57bac85832840a5e691
     public Long getId() { return userEntityId; }
 
     public String getFirstname() { return firstname; }
