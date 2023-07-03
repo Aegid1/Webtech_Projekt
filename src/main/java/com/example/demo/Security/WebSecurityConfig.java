@@ -15,6 +15,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 // Hier geht's zur Webseite -> https://spring.io/guides/gs/securing-web/
 
@@ -35,7 +38,8 @@ public class WebSecurityConfig {
             .disable()
             .authorizeHttpRequests()
             .requestMatchers(new AntPathRequestMatcher("/db-console/**"), 
-                            new AntPathRequestMatcher("/todo/**"))
+                            new AntPathRequestMatcher("/todo/**"),
+                            new AntPathRequestMatcher("/register"))
             .permitAll()
             .anyRequest()
             .authenticated()
@@ -50,5 +54,16 @@ public class WebSecurityConfig {
 
         return http.build();
 
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*"); // Erlaubt den Zugriff von allen Ursprüngen, hier kannst du spezifische Ursprünge angeben
+        configuration.addAllowedMethod("*"); // Erlaubt den Zugriff für alle HTTP-Methoden (GET, POST, etc.)
+        configuration.addAllowedHeader("*"); // Erlaubt den Zugriff für alle Header-Felder
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
