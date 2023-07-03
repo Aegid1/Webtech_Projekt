@@ -34,16 +34,22 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http
-            .csrf()
-            .disable()
-            .authorizeHttpRequests()
-            .requestMatchers(new AntPathRequestMatcher("/db-console/**"), 
-                            new AntPathRequestMatcher("/todo/**"),
-                            new AntPathRequestMatcher("/register"))
+                .csrf()
+                .disable()
+                .cors() // Enable CORS support
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers(new AntPathRequestMatcher("/db-console/**"),
+                        new AntPathRequestMatcher("/todo/**"),
+                        new AntPathRequestMatcher("/register"),
+                        new AntPathRequestMatcher("/authentication"))
             .permitAll()
             .anyRequest()
             .authenticated()
             .and()
+                .formLogin()
+                .defaultSuccessUrl("/") // Hier die gewünschte Weiterleitungs-URL nach erfolgreicher Authentifizierung angeben
+                .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
