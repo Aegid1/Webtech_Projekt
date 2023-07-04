@@ -74,6 +74,11 @@ public class UserEntity implements UserDetails{
         this.userEntityId = id;
     }
 
+    public void setRole(Role roleName) {
+        this.role = roleName;
+    }
+
+
     @Override
     public String getPassword() { return password; }
 
