@@ -13,7 +13,10 @@ public class ToDoEntity {
     private Long id;
 
     @Column
-    private String name;
+    private String title;
+
+    @Column
+    private String description;
 
     @Column
     private Date deadline;
@@ -21,24 +24,45 @@ public class ToDoEntity {
     @Transient
     private String date;
 
-//hier wirklich nur der Name der Person, oder person selber?
-    // @Column
-    // private String nameOfResponsiblePerson;
+    // Weitere Eigenschaften und Beziehungen können hier hinzugefügt werden
 
-    // mit Taskstatus noch verknüpfen
+    public Long getId() {
+        return id;
+    }
 
-    public Long getId() { return id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
+    public String getTitle() {
+        return title;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public Date getDeadline() { return deadline; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDeadline(Date deadline) { this.deadline = deadline; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public String getDate() { return date; }
+    public Date getDeadline() {
+        return deadline;
+    }
 
-    public void setDate(String date) { this.date = date; }
-    
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
