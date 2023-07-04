@@ -80,9 +80,9 @@ public class ToDoControllerTest {
                 .andExpect(jsonPath("$.date").value("2023-07-04"));
     }
 
+    // Test der Controller-Methode: Löschen eines To-Dos
     @Test
     public void testDeleteTodo() throws Exception {
-        // Test der Controller-Methode: Löschen eines To-Dos
         mockMvc.perform(delete("/delete/{id}", "1"))
                 .andExpect(status().isOk());
     }
