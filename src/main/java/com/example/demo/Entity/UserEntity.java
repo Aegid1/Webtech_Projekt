@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +34,8 @@ public class UserEntity implements UserDetails{
     
     @Column
     private String email;
-    
+
+    @JsonIgnore
     @Column
     private String password;
 
@@ -67,7 +69,11 @@ public class UserEntity implements UserDetails{
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
-    
+
+    public void setId(Long id) {
+        this.userEntityId = id;
+    }
+
     @Override
     public String getPassword() { return password; }
 
