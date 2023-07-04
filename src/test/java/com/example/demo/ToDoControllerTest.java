@@ -48,10 +48,10 @@ public class ToDoControllerTest {
         todo1.setDeadline(Date.valueOf("2023-07-04"));
         todos.add(todo1);
 
-        // Mock-Verhalten für den Service
+        // Mock-Verhalten für den Service: Rückgabe der To-Dos basierend auf einer List-ID
         when(toDoService.getTodosByListId(anyLong())).thenReturn(todos);
 
-        // Test der Controller-Methode
+        // Test der Controller-Methode: Abrufen der To-Dos
         mockMvc.perform(get("/alltodos/{id}", "1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -66,24 +66,23 @@ public class ToDoControllerTest {
         ToDoEntity todo = new ToDoEntity();
         todo.setId(1L);
         todo.setTitle("ToDo 1");
-        todo.setDeadline(Date.valueOf("2023-07-04"));
+        todo.setDate("2023-07-04");
 
-        // Mock-Verhalten für den Service
+        // Mock-Verhalten für den Service: Rückgabe eines einzelnen To-Dos basierend auf einer ID
         when(toDoService.findToDoByID(anyLong())).thenReturn(todo);
 
-        // Test der Controller-Methode
+        // Test der Controller-Methode: Abrufen eines einzelnen To-Dos
         mockMvc.perform(get("/todo/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.title").value("ToDo 1"))
                 .andExpect(jsonPath("$.date").value("2023-07-04"));
     }
 
-
     @Test
     public void testDeleteTodo() throws Exception {
-        // Test der Controller-Methode
+        // Test der Controller-Methode: Löschen eines To-Dos
         mockMvc.perform(delete("/delete/{id}", "1"))
                 .andExpect(status().isOk());
     }

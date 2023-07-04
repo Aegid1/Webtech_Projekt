@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
@@ -23,8 +24,6 @@ public class ToDoEntity {
 
     @Transient
     private String date;
-
-    // Weitere Eigenschaften und Beziehungen können hier hinzugefügt werden
 
     public Long getId() {
         return id;
@@ -56,6 +55,7 @@ public class ToDoEntity {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+        // Hier können weitere Verarbeitungen oder Validierungen für das Datum erfolgen
     }
 
     public String getDate() {

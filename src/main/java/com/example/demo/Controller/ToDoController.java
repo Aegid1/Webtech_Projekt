@@ -15,7 +15,6 @@ public class ToDoController {
     @Autowired
     ToDoService toDoService;
 
-    // nimmt alle ToDos mit einer ToDoListEntity-ID, nimmt jede Deadline und wandelt sie von DATE in String für das JSON-Objekt um
     @GetMapping("/alltodos/{id}")
     public List<ToDoEntity> getToDos(@PathVariable String id) {
 
@@ -24,11 +23,9 @@ public class ToDoController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         for (ToDoEntity todo : todos) {
-
             Date date = todo.getDeadline();
             String formattedDate = formatter.format(date);
             todo.setDate(formattedDate);
-
         }
 
         return todos;
@@ -44,16 +41,13 @@ public class ToDoController {
         toDoService.deleteToDo(Long.parseLong(id));
     }
 
-    //sind hier aber alle Werte abedeckt? Eigentlich würde todo.getDate fehlen  bspw.
     @PostMapping("/todo")
     public ToDoEntity createTodo(@RequestBody ToDoEntity todo) {
         return toDoService.create(todo.getTitle(), todo.getDescription(), todo.getDeadline());
     }
 
-
     @PutMapping("/todo/{id}")
     public ToDoEntity updateTodo(@PathVariable String id, @RequestBody ToDoEntity todo) {
-        // Fügen Sie den Code für das Aktualisieren eines ToDos hinzu (z. B. Aufruf der entsprechenden Service-Methode)
         ToDoEntity existingTodo = toDoService.findToDoByID(Long.parseLong(id));
         if (existingTodo != null) {
             existingTodo.setTitle(todo.getTitle());
