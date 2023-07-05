@@ -14,15 +14,17 @@ import com.example.demo.Repository.UserRepository;
 public class GroupService {
 
     @Autowired
-    GroupRepository repo;
+    private GroupRepository repo;
 
     @Autowired
     UserRepository userRepo;
 
-    public GroupEntity createGroup(GroupEntity group){ return repo.save(group); }
-
+    public GroupEntity createGroup(GroupEntity group) {
+        return repo.save(group);
+    }
     public void deleteGroup(GroupEntity group){ repo.delete(group); }
 
-    public List<UserEntity> findGroupId(Long id){ return userRepo.findUsersByGroupId(id); }       
-
+    public List<UserEntity> findGroupId(Long id) {
+        return userRepo.findUsersByGroupId(id);
+    }
 }

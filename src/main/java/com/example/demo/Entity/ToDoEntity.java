@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,10 @@ public class ToDoEntity {
     private Long id;
 
     @Column
-    private String name;
+    private String title;
+
+    @Column
+    private String description;
 
     @Column
     private Date deadline;
@@ -21,24 +25,44 @@ public class ToDoEntity {
     @Transient
     private String date;
 
-//hier wirklich nur der Name der Person, oder person selber?
-    // @Column
-    // private String nameOfResponsiblePerson;
+    public Long getId() {
+        return id;
+    }
 
-    // mit Taskstatus noch verknüpfen
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getId() { return id; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getName() { return name; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Date getDeadline() { return deadline; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setDeadline(Date deadline) { this.deadline = deadline; }
+    public Date getDeadline() {
+        return deadline;
+    }
 
-    public String getDate() { return date; }
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+        // Hier können weitere Verarbeitungen oder Validierungen für das Datum erfolgen
+    }
 
-    public void setDate(String date) { this.date = date; }
-    
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
