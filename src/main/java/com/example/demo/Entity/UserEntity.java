@@ -62,6 +62,8 @@ public class UserEntity implements UserDetails{
 
     }
 
+    public void setId(Long id) { this.userEntityId= id; }
+
     public Long getId() { return userEntityId; }
 
     public String getFirstname() { return firstname; }
@@ -75,8 +77,6 @@ public class UserEntity implements UserDetails{
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
-
-    
     
     public String getProfilPicture() {
         return profilPicture;
