@@ -2,18 +2,15 @@ package com.example.demo;
 
 public enum TaskStatus {
 
-        ERLEDIGT("grün"),
-        BALD_ZU_ERLEDIGEN("gelb"),
-        ÜBERFÄLLIG("rot");
+    ERLEDIGT("grün"),
 
-        private final String farbe;
+    BALD_ZU_ERLEDIGEN("gelb"),
+    
+    ÜBERFÄLLIG("rot");
 
-        private TaskStatus(String farbe) {
-            this.farbe = farbe;
-        }
+    private final String farbe;
 
-        public String getFarbe() {
-            return farbe;
-        }
+    private TaskStatus(String farbe) { this.farbe = farbe; }
+    public String getFarbe() { return farbe; }
 }
 

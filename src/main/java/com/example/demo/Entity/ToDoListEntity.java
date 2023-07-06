@@ -2,7 +2,10 @@ package com.example.demo.Entity;
 
 //nur eine ToDoList generell oder mehrere ToDoLists möglich (für jeden Tag bspw.)
 
-import jakarta.persistence.*;
+import jakarta.persistence.*;//warum enthält hier TodoList eine weitere TodoList?
+    // @OneToMany
+    // @JoinColumn(name = "fk_toDoEntity_id")
+    // private Long fk_toDoListEntity_id;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,16 +20,14 @@ public class ToDoListEntity{
     @Column
     private String name = "Aufgaben";
 
-    //warum enthält hier TodoList eine weitere TodoList?
-    // @OneToMany
-    // @JoinColumn(name = "fk_toDoEntity_id")
-    // private Long fk_toDoListEntity_id;
+    
     @OneToOne
     @JoinColumn(name = "groupId")
     private GroupEntity fkGroupId;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<ToDoEntity> todos;
+    // @OneToMany(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "toDoId")
+    // private List<ToDoEntity> todos;
 
     //public void addToDoEntity(ToDoEntity todo){ todos.add(todo); }
 
@@ -54,12 +55,12 @@ public class ToDoListEntity{
         this.fkGroupId = fkGroupId;
     }
 
-    public List<ToDoEntity> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<ToDoEntity> todos) {
-        this.todos = todos;
-    }
+    // public List<ToDoEntity> getTodos() {
+        // return todos;
+    // }
+// 
+    // public void setTodos(List<ToDoEntity> todos) {
+        // this.todos = todos;
+    // }
     
 }

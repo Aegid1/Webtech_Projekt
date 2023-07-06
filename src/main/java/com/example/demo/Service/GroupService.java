@@ -19,12 +19,14 @@ public class GroupService {
     @Autowired
     UserRepository userRepo;
 
-    public GroupEntity createGroup(GroupEntity group) {
-        return repo.save(group);
-    }
+    public GroupEntity createGroup(GroupEntity group) { return repo.save(group); }
+    
     public void deleteGroup(GroupEntity group){ repo.delete(group); }
 
-    public List<UserEntity> findGroupId(Long id) {
-        return userRepo.findUsersByGroupId(id);
+    public List<UserEntity> findGroupId(Long userId) {
+        Long groupId = findGroupIdByUserId(userId);
+        return userRepo.findUsersByGroupId(groupId);
     }
+
+    public Long findGroupIdByUserId(Long userId){ return userRepo.findGroupIdByUserId(userId); }
 }

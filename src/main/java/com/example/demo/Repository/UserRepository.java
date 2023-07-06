@@ -11,10 +11,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
+
     Optional<UserEntity> findByEmail(String email);
     
-    @Query(value = "SELECT * FROM USER_ENTITY WHERE USER_ENTITY.GROUP_ID = :groupId", nativeQuery = true)
+    @Query(value = "SELECT * FROM user_entity WHERE USER_ENTITY.GROUP_ID = :groupId", nativeQuery = true)
     List<UserEntity> findUsersByGroupId(@Param("groupId")Long groupId); 
+
+    @Query(value = "SELECT user_entity_id FROM user_entity WHERE user_entity.email = :email", nativeQuery = true)
+    Long findIdByEmail(@Param("email")String email);
+    
+    @Query(value = "SELECT user_entity.group_Id FROM user_entity WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
+    Long findGroupIdByUserId(@Param("userId")Long userId);
+
 }
 
 

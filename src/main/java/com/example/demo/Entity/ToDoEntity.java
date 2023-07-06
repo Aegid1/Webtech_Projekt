@@ -11,7 +11,7 @@ public class ToDoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long toDoId;
 
     @Column
     private String title;
@@ -25,12 +25,16 @@ public class ToDoEntity {
     @Transient
     private String date;
 
+    @ManyToOne
+    @JoinColumn(name = "toDoListId")
+    private ToDoListEntity toDoList;
+
     public Long getId() {
-        return id;
+        return toDoId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.toDoId = id;
     }
 
     public String getTitle() {
@@ -65,4 +69,22 @@ public class ToDoEntity {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public Long getToDoId() {
+        return toDoId;
+    }
+
+    public void setToDoId(Long toDoId) {
+        this.toDoId = toDoId;
+    }
+
+    public ToDoListEntity getToDoList() {
+        return toDoList;
+    }
+
+    public void setToDoList(ToDoListEntity toDoList) {
+        this.toDoList = toDoList;
+    }
+
+    
 }

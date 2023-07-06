@@ -17,5 +17,6 @@ public class UserService {
 
     public UserEntity findUserByID(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }   
     
+    public Long getUserIdByEmail(String email) { return repo.findIdByEmail(email); }
     
 }

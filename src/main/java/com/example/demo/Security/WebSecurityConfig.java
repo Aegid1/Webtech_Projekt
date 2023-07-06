@@ -1,8 +1,12 @@
 package com.example.demo.Security;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -32,14 +36,16 @@ public class WebSecurityConfig {
         http
                 .csrf()
                 .disable()
-                .cors() // Enable CORS support
+                .cors()
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(new AntPathRequestMatcher("/db-console/**"),
                         new AntPathRequestMatcher("/todo/**"),
                         new AntPathRequestMatcher("/register"),
                         new AntPathRequestMatcher("/authentication"),
-                            new AntPathRequestMatcher("/getGroup/**")
+                        new AntPathRequestMatcher("/getGroup/**"),
+                        new AntPathRequestMatcher("/userEmail/**"),
+                        new AntPathRequestMatcher("/alltodos/**")
                             )
             .permitAll()
             .anyRequest()
@@ -64,9 +70,9 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); // Erlaubt den Zugriff von allen Ursprüngen, hier kannst du spezifische Ursprünge angeben
-        configuration.addAllowedMethod("*"); // Erlaubt den Zugriff für alle HTTP-Methoden (GET, POST, etc.)
-        configuration.addAllowedHeader("*"); // Erlaubt den Zugriff für alle Header-Felder
+        configuration.setAllowedOrigins(List.of("https://aegid1.github.io")); 
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }

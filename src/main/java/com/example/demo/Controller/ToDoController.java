@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.ToDoEntity;
+import com.example.demo.Service.ToDoListService;
 import com.example.demo.Service.ToDoService;
 
 import java.text.SimpleDateFormat;
@@ -15,9 +16,13 @@ public class ToDoController {
     @Autowired
     ToDoService toDoService;
 
+    @Autowired 
+    ToDoListService toDoListService;
+
     @GetMapping("/alltodos/{id}")
     public List<ToDoEntity> getToDos(@PathVariable String id) {
 
+        //Long todolist = toDoListService.getTodoListByGroupId()
         List<ToDoEntity> todos = toDoService.getTodosByListId(Long.parseLong(id));
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -27,7 +32,7 @@ public class ToDoController {
             String formattedDate = formatter.format(date);
             todo.setDate(formattedDate);
         }
-
+        System.out.println("test");
         return todos;
     }
 
@@ -35,7 +40,7 @@ public class ToDoController {
     public ToDoEntity getTodo(@PathVariable String id) {
         return toDoService.findToDoByID(Long.parseLong(id));
     }
-
+    
     @DeleteMapping("delete/{id}")
     public void deleteTodo(@PathVariable String id){
         toDoService.deleteToDo(Long.parseLong(id));
