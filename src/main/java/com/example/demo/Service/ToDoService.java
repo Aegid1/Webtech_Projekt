@@ -1,7 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.Repository.ToDoRepository;
+import com.example.demo.Repository.UserRepository;
 import com.example.demo.Entity.ToDoEntity;
+import com.example.demo.Entity.ToDoListEntity;
 
 import java.sql.Date;
 import java.util.List;
@@ -45,18 +47,19 @@ public class ToDoService {
         repo.save(todo);
     }
 
-    public ToDoEntity create(String title, String description, Date deadline) {
+    public ToDoEntity create(String title, Date deadline, ToDoListEntity toDoListId) {
+
+
         ToDoEntity newToDo = new ToDoEntity();
         newToDo.setTitle(title);
-        newToDo.setDescription(description);
         newToDo.setDeadline(deadline);
+        newToDo.setToDoList(toDoListId);
         return repo.save(newToDo);
     }
 
     public ToDoEntity update(ToDoEntity updatedTodo) {
         ToDoEntity existingTodo = repo.findById(updatedTodo.getId()).orElseThrow(() -> new RuntimeException());
         existingTodo.setTitle(updatedTodo.getTitle());
-        existingTodo.setDescription(updatedTodo.getDescription());
         existingTodo.setDeadline(updatedTodo.getDeadline());
         return repo.save(existingTodo);
     }

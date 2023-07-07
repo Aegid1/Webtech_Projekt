@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ToDoEntity {
 
@@ -25,6 +27,7 @@ public class ToDoEntity {
     @Transient
     private String date;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "toDoListId")
     private ToDoListEntity toDoList;

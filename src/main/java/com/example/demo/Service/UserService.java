@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.Entity.ToDoListEntity;
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,6 @@ public class UserService {
     
     public Long getUserIdByEmail(String email) { return repo.findIdByEmail(email); }
     
+    public ToDoListEntity findToDoListIdByUserId(String userId){ return repo.findToDoListIdByUserId(Long.parseLong(userId)); }
+
 }

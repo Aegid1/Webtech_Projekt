@@ -1,10 +1,14 @@
 package com.example.demo.Controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +26,21 @@ public class GroupController {
     @Autowired GroupService groupService;
 
     @GetMapping("/getGroup/{id}")
-    public List<UserEntity> getToDos(@PathVariable String id) { 
+    public ResponseEntity<List<Map<String, Object>>> getToDos(@PathVariable String id) { 
         
+        List<Map<String, Object>> nameAndScore = new ArrayList<>();
+
         List<UserEntity> group = groupService.findGroupId(Long.parseLong(id));
-        return group;
+
+        for(UserEntity user : group){ 
+
+            HashMap<String, Object> userData = new HashMap<>();
+            userData.put("id", user.getId());
+            userData.put("firstname", user.getFirstname());
+            userData.put("score", Integer.parseInt(user.getScore()));
+            nameAndScore.add(userData);
+        }
+
+        return ResponseEntity.ok(nameAndScore);
     }
 }

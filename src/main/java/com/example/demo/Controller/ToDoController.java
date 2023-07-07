@@ -1,13 +1,17 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.ToDoEntity;
+import com.example.demo.Entity.ToDoListEntity;
+import com.example.demo.Service.GroupService;
 import com.example.demo.Service.ToDoListService;
 import com.example.demo.Service.ToDoService;
+import com.example.demo.Service.UserService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,11 +23,15 @@ public class ToDoController {
     @Autowired 
     ToDoListService toDoListService;
 
-    @GetMapping("/alltodos/{id}")
-    public List<ToDoEntity> getToDos(@PathVariable String id) {
+    @Autowired
+    UserService uService;
 
-        //Long todolist = toDoListService.getTodoListByGroupId()
-        List<ToDoEntity> todos = toDoService.getTodosByListId(Long.parseLong(id));
+    @GetMapping("/alltodos/{userId}")
+    public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
+
+        Long todolistId = toDoListService.getTodoListByUserId(Long.parseLong(userId));
+
+        List<ToDoEntity> todos = toDoService.getTodosByListId(todolistId);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -33,7 +41,7 @@ public class ToDoController {
             todo.setDate(formattedDate);
         }
         System.out.println("test");
-        return todos;
+        return ResponseEntity.ok(todos);
     }
 
     @GetMapping("todo/{id}")
@@ -46,17 +54,20 @@ public class ToDoController {
         toDoService.deleteToDo(Long.parseLong(id));
     }
 
-    @PostMapping("/todo")
-    public ToDoEntity createTodo(@RequestBody ToDoEntity todo) {
-        return toDoService.create(todo.getTitle(), todo.getDescription(), todo.getDeadline());
+    @PostMapping("/todo/{id}")
+    public ToDoEntity createTodo(@PathVariable String userId, @RequestBody ToDoEntity todo) {
+
+        ToDoListEntity todoListId = uService.findToDoListIdByUserId(userId);
+        return toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId);
     }
 
+    //this is for edit purposes
     @PutMapping("/todo/{id}")
     public ToDoEntity updateTodo(@PathVariable String id, @RequestBody ToDoEntity todo) {
         ToDoEntity existingTodo = toDoService.findToDoByID(Long.parseLong(id));
         if (existingTodo != null) {
+            
             existingTodo.setTitle(todo.getTitle());
-            existingTodo.setDescription(todo.getDescription());
             existingTodo.setDeadline(todo.getDeadline());
             return toDoService.update(existingTodo);
         } else {

@@ -18,6 +18,8 @@ public class ToDoListService {
     public void deleteToDoList(ToDoListEntity toDoList){ repo.delete(toDoList); }
 
     public ToDoListEntity findToDoListByID(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }
+
+    public Long getTodoListByUserId(Long userId){ return repo.findByToDoListId(userId); }
         
 }
 

@@ -46,7 +46,7 @@ public class WebSecurityConfig {
                         new AntPathRequestMatcher("/getGroup/**"),
                         new AntPathRequestMatcher("/userEmail/**"),
                         new AntPathRequestMatcher("/alltodos/**")
-                            )
+                        )
             .permitAll()
             .anyRequest()
             .authenticated()

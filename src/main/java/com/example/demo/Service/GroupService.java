@@ -29,4 +29,5 @@ public class GroupService {
     }
 
     public Long findGroupIdByUserId(Long userId){ return userRepo.findGroupIdByUserId(userId); }
+
 }
