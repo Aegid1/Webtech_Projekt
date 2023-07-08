@@ -35,12 +35,6 @@ public class ToDoService {
         repo.save(todo);
     }
 
-    public void setDescription(Long id, String description) {
-        ToDoEntity todo = repo.findById(id).orElseThrow(() -> new RuntimeException());
-        todo.setDescription(description);
-        repo.save(todo);
-    }
-
     public void setDeadline(Long id, Date deadline) {
         ToDoEntity todo = repo.findById(id).orElseThrow(() -> new RuntimeException());
         todo.setDeadline(deadline);
@@ -54,6 +48,8 @@ public class ToDoService {
         newToDo.setTitle(title);
         newToDo.setDeadline(deadline);
         newToDo.setToDoList(toDoListId);
+        newToDo.setEditMode(false);
+        
         return repo.save(newToDo);
     }
 

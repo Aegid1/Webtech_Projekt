@@ -10,6 +10,16 @@ import java.util.List;
 @Entity
 public class ToDoListEntity{
 
+    public ToDoListEntity(Long id, String name, Long fkGroupId){
+        this.toDoListId = id;
+        this.name = name;
+        this.fkGroupId = fkGroupId;
+    }
+
+    public ToDoListEntity(){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long toDoListId;
@@ -17,9 +27,8 @@ public class ToDoListEntity{
     @Column
     private String name = "Aufgaben";
     
-    @OneToOne
-    @JoinColumn(name = "groupId")
-    private GroupEntity fkGroupId;
+    @Column
+    private Long fkGroupId;
 
     // @OneToMany(fetch = FetchType.EAGER)
     // @JoinColumn(name = "toDoId")
@@ -43,11 +52,11 @@ public class ToDoListEntity{
         this.name = name;
     }
 
-    public GroupEntity getFkGroupId() {
+    public Long getFkGroupId() {
         return fkGroupId;
     }
 
-    public void setFkGroupId(GroupEntity fkGroupId) {
+    public void setFkGroupId(Long fkGroupId) {
         this.fkGroupId = fkGroupId;
     }
 

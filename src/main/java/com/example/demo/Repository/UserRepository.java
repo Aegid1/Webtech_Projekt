@@ -24,12 +24,6 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Query(value = "SELECT user_entity.group_Id FROM user_entity WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
     Long findGroupIdByUserId(@Param("userId")Long userId);
     
-    @Query(value = "SELECT to_do_list_entity.* FROM user_entity " + 
-                    "INNER JOIN group_entity ON user_entity.group_id = group_entity.group_id " + 
-                    "INNER JOIN to_do_list_entity ON to_do_list_entity.group_id = group_entity.to_do_list_id " +
-                    "WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
-    ToDoListEntity findToDoListIdByUserId(@Param("userId")Long userId);
-    
 }
 
 

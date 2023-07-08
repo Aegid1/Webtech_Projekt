@@ -3,8 +3,6 @@ package com.example.demo.Entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,7 +17,7 @@ public class ToDoEntity {
     private String title;
 
     @Column
-    private String description;
+    private boolean editMode;
 
     @Column
     private Date deadline;
@@ -48,12 +46,12 @@ public class ToDoEntity {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean getEditMode() {
+        return this.editMode;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
     }
 
     public Date getDeadline() {

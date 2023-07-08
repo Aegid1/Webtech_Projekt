@@ -54,10 +54,11 @@ public class ToDoController {
         toDoService.deleteToDo(Long.parseLong(id));
     }
 
-    @PostMapping("/todo/{id}")
-    public ToDoEntity createTodo(@PathVariable String userId, @RequestBody ToDoEntity todo) {
-
+    @PostMapping("/todo/{userId}")
+    public ToDoEntity createTodo(@RequestBody ToDoEntity todo, @PathVariable String userId) {
+        System.out.println(todo);
         ToDoListEntity todoListId = uService.findToDoListIdByUserId(userId);
+        System.out.println(todoListId);
         return toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId);
     }
 
