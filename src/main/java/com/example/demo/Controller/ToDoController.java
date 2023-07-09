@@ -62,9 +62,9 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId));
     }
 
-    @PutMapping("/updateScore/{userId}")
-    public ResponseEntity<Void> updateUserScoreAndDeleteTodo(@RequestBody ToDoEntity todo, @PathVariable String userId){
-        toDoService.deleteToDo(todo.getId());
+    @DeleteMapping("/updateScore/{userId}/{todoId}")
+    public ResponseEntity<Void> updateUserScoreAndDeleteTodo(@PathVariable String userId, @PathVariable String todoId){
+        toDoService.deleteToDo(Long.parseLong(todoId));
         uService.updateScore(Long.parseLong(userId));
         return ResponseEntity.ok().build();
     }
