@@ -62,6 +62,12 @@ public class ToDoController {
         return toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId);
     }
 
+    @PutMapping("/updateScore/{userId}")
+    public void updateUserScoreAndDeleteTodo(@RequestBody ToDoEntity todo, @PathVariable String userId){
+        toDoService.deleteToDo(todo.getId());
+        uService.updateScore(Long.parseLong(userId));
+    }
+
     //this is for edit purposes
     @PutMapping("/todo/{id}")
     public ToDoEntity updateTodo(@PathVariable String id, @RequestBody ToDoEntity todo) {

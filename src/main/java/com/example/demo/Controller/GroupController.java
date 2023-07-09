@@ -1,23 +1,17 @@
 package com.example.demo.Controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Entity.GroupEntity;
-import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.UserEntity;
-import com.example.demo.Repository.GroupRepository;
 import com.example.demo.Service.GroupService;
 
 @RestController

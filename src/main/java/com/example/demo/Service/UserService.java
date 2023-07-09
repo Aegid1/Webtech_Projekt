@@ -26,4 +26,5 @@ public class UserService {
     
     public ToDoListEntity findToDoListIdByUserId(String userId){ return toDoListRepository.findToDoListIdByUserId(Long.parseLong(userId)); }
 
+    public void updateScore(Long userId){ repo.changeUserScore(userId); }
 }
