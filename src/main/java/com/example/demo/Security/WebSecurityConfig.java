@@ -47,8 +47,8 @@ public class WebSecurityConfig {
                         new AntPathRequestMatcher("/userEmail/**"),
                         new AntPathRequestMatcher("/alltodos/**"),
                         new AntPathRequestMatcher("/todo/**"),
-                        new AntPathRequestMatcher("/delete/**")
-
+                        new AntPathRequestMatcher("/delete/**"),
+                        new AntPathRequestMatcher("/updateScore/**")
                         )
             .permitAll()
             .anyRequest()

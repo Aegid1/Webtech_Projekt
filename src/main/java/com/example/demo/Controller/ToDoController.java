@@ -2,7 +2,6 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.ToDoListEntity;
-import com.example.demo.Service.GroupService;
 import com.example.demo.Service.ToDoListService;
 import com.example.demo.Service.ToDoService;
 import com.example.demo.Service.UserService;
@@ -50,25 +49,26 @@ public class ToDoController {
     }
     
     @DeleteMapping("delete/{id}")
-    public void deleteTodo(@PathVariable String id){
+    public ResponseEntity<Void> deleteTodo(@PathVariable String id){
         toDoService.deleteToDo(Long.parseLong(id));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/todo/{userId}")
-    public ToDoEntity createTodo(@RequestBody ToDoEntity todo, @PathVariable String userId) {
+    public ResponseEntity<ToDoEntity> createTodo(@RequestBody ToDoEntity todo, @PathVariable String userId) {
         System.out.println(todo);
         ToDoListEntity todoListId = uService.findToDoListIdByUserId(userId);
         System.out.println(todoListId);
-        return toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId);
+        return ResponseEntity.ok(toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId));
     }
 
     @PutMapping("/updateScore/{userId}")
-    public void updateUserScoreAndDeleteTodo(@RequestBody ToDoEntity todo, @PathVariable String userId){
+    public ResponseEntity<Void> updateUserScoreAndDeleteTodo(@RequestBody ToDoEntity todo, @PathVariable String userId){
         toDoService.deleteToDo(todo.getId());
         uService.updateScore(Long.parseLong(userId));
+        return ResponseEntity.ok().build();
     }
 
-    //this is for edit purposes
     @PutMapping("/todo/{id}")
     public ToDoEntity updateTodo(@PathVariable String id, @RequestBody ToDoEntity todo) {
         ToDoEntity existingTodo = toDoService.findToDoByID(Long.parseLong(id));
