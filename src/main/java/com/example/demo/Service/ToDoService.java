@@ -6,6 +6,7 @@ import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.ToDoListEntity;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,42 @@ public class ToDoService {
     ToDoRepository repo;
 
     public List<ToDoEntity> getTodosByListId(Long todoListId) {
-        return repo.findByToDoListId(todoListId);
+
+        List<ToDoEntity> todos = repo.findByToDoListId(todoListId);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (ToDoEntity todo : todos) {
+
+            Date date = todo.getDeadline();
+            String formattedDate = formatter.format(date);
+            todo.setDate(formattedDate);
+        }
+
+        return todos;
     }
 
     public void deleteToDo(Long id) {
         repo.deleteById(id);
     }
 
-    public ToDoEntity findToDoByID(Long id) {
+    public ToDoEntity findTodoById(Long id){
+
         return repo.findById(id).orElseThrow(() -> new RuntimeException());
+    }
+
+    public ToDoEntity updateTodoById(Long id, ToDoEntity todo) {
+
+        ToDoEntity existingTodo = findTodoById(id);
+
+        if (existingTodo != null) {
+            
+            existingTodo.setTitle(todo.getTitle());
+            existingTodo.setDeadline(todo.getDeadline());
+            return update(existingTodo);
+        } else {
+            throw new IllegalArgumentException("ToDoEntity mit ID " + id + " existiert nicht.");
+        }
+
     }
 
     public void setTitle(Long id, String title) {
