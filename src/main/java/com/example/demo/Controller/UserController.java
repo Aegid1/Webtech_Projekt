@@ -2,13 +2,10 @@ package com.example.demo.Controller;
 
 import com.example.demo.Service.UserService;
 import com.example.demo.Entity.UserEntity;
-
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,14 +26,9 @@ public class UserController {
     public UserEntity getUser(@PathVariable String id) { return uService.findUserByID(Long.parseLong(id)); }
 
     @GetMapping("/userEmail/{email}")
-    public ResponseEntity<Map<String, Long>> getUserIdByEmail(@PathVariable String email) { 
-        
-        if(email.contains("'")){ email = email.substring(1, email.length() - 1); }
-
-        Long userId = uService.getUserIdByEmail(email);
-        Map<String, Long> response = new HashMap<>();
-        response.put("Id", userId);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Map<String, Long>> getUserIdByEmail(@PathVariable String email) {  
+    
+        return ResponseEntity.ok(uService.getUserIdByEmail(email));
     }
 }
 

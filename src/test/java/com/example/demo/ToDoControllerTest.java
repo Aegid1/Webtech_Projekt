@@ -68,7 +68,7 @@ public class ToDoControllerTest {
         todo.setDate("2023-07-04");
 
         // Mock-Verhalten für den Service: Rückgabe eines einzelnen To-Dos basierend auf einer ID
-        when(toDoService.findToDoByID(anyLong())).thenReturn(todo);
+        when(toDoService.findTodoById(anyLong())).thenReturn(todo);
 
         // Test der Controller-Methode: Abrufen eines einzelnen To-Dos
         mockMvc.perform(get("/todo/{id}", 1L))

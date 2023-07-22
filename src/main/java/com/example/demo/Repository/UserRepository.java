@@ -1,5 +1,4 @@
 package com.example.demo.Repository;
-import com.example.demo.Entity.ToDoListEntity;
 import com.example.demo.Entity.UserEntity;
 
 import java.util.List;

@@ -4,9 +4,6 @@ package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-import java.util.List;
-
 @Entity
 public class ToDoListEntity{
 

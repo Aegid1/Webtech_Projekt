@@ -1,9 +1,7 @@
 package com.example.demo.Repository;
 
-import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.ToDoListEntity;
 
-import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
