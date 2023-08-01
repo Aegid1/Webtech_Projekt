@@ -4,10 +4,12 @@ import com.example.demo.Entity.UserEntity;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
@@ -23,6 +25,8 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Query(value = "SELECT user_entity.group_Id FROM user_entity WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
     Long findGroupIdByUserId(@Param("userId")Long userId);
     
+    @Transactional
+    @Modifying
     @Query(value = "UPDATE user_entity SET user_entity.score = user_entity.score + 5 WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
     void changeUserScore(@Param("userId")Long userId);
 }
