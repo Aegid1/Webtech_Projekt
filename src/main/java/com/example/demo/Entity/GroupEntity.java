@@ -11,67 +11,42 @@ public class GroupEntity {
     @Column
     private String name;
 
-    // Inwiefern notwendig ergibt sich aus weiterer Arbeit
+    // in what way necessary, is going to be shown during the project
     @Column
     private Integer countOfMembers;
 
-    //eventuell byte[] statt String
+    //maybe byte[] instead of String
     @Column
     private String profilePicture;
 
+    // in what way necessary, is going to be shown during the project
     @Column
     private String scoreSum;
 
     private Long fkToDoListId;
 
-    public Long getGroupId() {
-        return groupId;
-    }
+    public Long getGroupId() { return groupId; }
 
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
+    public void setGroupId(Long groupId) { this.groupId = groupId; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public Integer getCountOfMembers() {
-        return countOfMembers;
-    }
+    public Integer getCountOfMembers() { return countOfMembers; }
 
-    public void setCountOfMembers(Integer countOfMembers) {
-        this.countOfMembers = countOfMembers;
-    }
+    public void setCountOfMembers(Integer countOfMembers) { this.countOfMembers = countOfMembers; }
 
-    public String getProfilePicture() {
-        return profilePicture;
-    }
+    public String getProfilePicture() { return profilePicture; }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
 
-    public String getScoreSum() {
-        return scoreSum;
-    }
+    public String getScoreSum() { return scoreSum; }
 
-    public void setScoreSum(String scoreSum) {
-        this.scoreSum = scoreSum;
-    }
+    public void setScoreSum(String scoreSum) { this.scoreSum = scoreSum; }
 
-    public Long getFkToDoListId() {
-        return fkToDoListId;
-    }
+    public Long getFkToDoListId() { return fkToDoListId; }
 
-    public void setFkToDoListId(Long fkToDoListId) {
-        this.fkToDoListId = fkToDoListId;
-    }
-
-
+    public void setFkToDoListId(Long fkToDoListId) { this.fkToDoListId = fkToDoListId; }
     
 }

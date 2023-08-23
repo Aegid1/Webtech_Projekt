@@ -23,6 +23,11 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    /*
+     * registers a user in the UserRepository/Database
+     * @Param RegisterRequest -> the request that contains the data of the user
+     * @return AuthenticationResponse -> response of the jwt authentication process
+     */
     public AuthenticationResponse register(RegisterRequest request) {
         var user = new UserEntity(request.getFirstname(), request.getLastname(), request.getEmail(), passwordEncoder.encode(request.getPassword()), Role.USER);
         repository.save(user);
@@ -31,8 +36,12 @@ public class AuthenticationService {
         return new AuthenticationResponse(jwtToken);
     }
 
+    /*
+     * authenticates the user when the email and password of the request from the user exist in the database 
+     * @Param AuthenticationRequest -> the request that is going to be checked 
+     * @return AuthenticationResponse -> the response of the authentication process
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 

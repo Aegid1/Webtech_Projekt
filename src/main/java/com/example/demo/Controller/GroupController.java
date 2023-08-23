@@ -15,7 +15,7 @@ import com.example.demo.Service.GroupService;
 public class GroupController {
     
     @Autowired GroupService groupService;
-
+    
     @GetMapping("/getGroup/{id}")
     public ResponseEntity<List<Map<String, Object>>> getToDos(@PathVariable String id) { 
 

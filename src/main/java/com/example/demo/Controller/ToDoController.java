@@ -23,6 +23,12 @@ public class ToDoController {
     @Autowired
     UserService uService;
 
+
+    /*
+     * endpoint to get all todos by the userid of a user
+     * @Param String -> the userid
+     * @return ResponseEntity<List<ToDoEntity>> -> a list containing all todos of a user
+     */
     @GetMapping("/alltodos/{userId}")
     public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
 
@@ -30,6 +36,7 @@ public class ToDoController {
         List<ToDoEntity> todos = toDoService.getTodosByListId(todolistId);
         return ResponseEntity.ok(todos);
     }
+
 
     @GetMapping("todo/{id}")
     public ToDoEntity getTodo(@PathVariable String id) {
@@ -44,6 +51,12 @@ public class ToDoController {
         return ResponseEntity.ok().build();
     }
 
+    /*
+     * endpoint to create a new todo by using the userid of the user
+     * @Param ToDoEntity -> the data of the todo that will be created
+     * @Param String -> the userid of the user
+     * @return ResponseEntity<ToDoEntity> -> the created todo
+     */
     @PostMapping("/todo/{userId}")
     public ResponseEntity<ToDoEntity> createTodo(@RequestBody ToDoEntity todo, @PathVariable String userId) {
 
@@ -51,6 +64,12 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId));
     }
 
+    /*
+     * endpoint to finish a task, so the score of a user gets updated and the todo gets deleted
+     * @Param String -> the userid of the user
+     * @Param String -> the todoid of the todo which the user finished
+     * @return ResponseEntity<Void> -> an empty response, that contains the status code of the action
+     */
     @DeleteMapping("/updateScore/{userId}/{todoId}")
     public ResponseEntity<Void> updateUserScoreAndDeleteTodo(@PathVariable String userId, @PathVariable String todoId){
 
@@ -60,8 +79,8 @@ public class ToDoController {
     }
 
     @PutMapping("/todo/{id}")
-    public ResponseEntity<ToDoEntity> updateTodo(@PathVariable String id, @RequestBody ToDoEntity todo) {
+    public ResponseEntity<ToDoEntity> updateTodo(@RequestBody ToDoEntity todo) {
 
-        return ResponseEntity.ok(toDoService.updateTodoById(Long.parseLong(id), todo));
+        return ResponseEntity.ok(toDoService.updateTodoById(todo));
     }
 }

@@ -30,62 +30,33 @@ public class ToDoEntity {
     @JoinColumn(name = "toDoListId")
     private ToDoListEntity toDoList;
 
-    public Long getId() {
-        return toDoId;
-    }
+    public Long getId() { return toDoId; }
 
-    public void setId(Long id) {
-        this.toDoId = id;
-    }
+    public void setId(Long id) { this.toDoId = id; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public boolean getEditMode() {
-        return this.editMode;
-    }
+    public boolean getEditMode() { return this.editMode; }
 
-    public void setEditMode(boolean editMode) {
-        this.editMode = editMode;
-    }
+    public void setEditMode(boolean editMode) { this.editMode = editMode; }
 
-    public Date getDeadline() {
-        return deadline;
-    }
+    public Date getDeadline() { return deadline; }
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-        // Hier können weitere Verarbeitungen oder Validierungen für das Datum erfolgen
-    }
+    public void setDeadline(Date deadline) { this.deadline = deadline; }
 
-    public String getDate() {
-        return date;
-    }
+    public String getDate() { return date; }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public void setDate(String date) { this.date = date; }
 
-    public Long getToDoId() {
-        return toDoId;
-    }
+    public Long getToDoId() { return toDoId; }
 
-    public void setToDoId(Long toDoId) {
-        this.toDoId = toDoId;
-    }
+    public void setToDoId(Long toDoId) { this.toDoId = toDoId; }
 
-    public ToDoListEntity getToDoList() {
-        return toDoList;
-    }
+    public ToDoListEntity getToDoList() { return toDoList; }
 
-    public void setToDoList(ToDoListEntity toDoList) {
-        this.toDoList = toDoList;
-    }
+    public void setToDoList(ToDoListEntity toDoList) { this.toDoList = toDoList; }
 
     
 }

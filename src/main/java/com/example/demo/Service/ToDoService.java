@@ -17,6 +17,11 @@ public class ToDoService {
     @Autowired
     ToDoRepository repo;
 
+    /*
+     * gets all todos by the todolistid and converts the format of the date into YYYY-MM-DD
+     * @param Long -> the id of the todolist
+     * @return List<ToDoEntity> -> a list containing all todos 
+     */
     public List<ToDoEntity> getTodosByListId(Long todoListId) {
 
         List<ToDoEntity> todos = repo.findByToDoListId(todoListId);
@@ -32,44 +37,32 @@ public class ToDoService {
         return todos;
     }
 
-    public void deleteToDo(Long id) {
-        repo.deleteById(id);
-    }
+    public void deleteToDo(Long id) { repo.deleteById(id); }
 
-    public ToDoEntity findTodoById(Long id){
+    public ToDoEntity findTodoById(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }
 
-        return repo.findById(id).orElseThrow(() -> new RuntimeException());
-    }
+    /*
+     * gets the todo, that is stored in the database and updates it with the new information of the new todo
+     * @param ToDoEntity -> the new todo with the new information
+     * @return ToDoEntity -> the updated todo
+     */
+    public ToDoEntity updateTodoById(ToDoEntity todo) {
 
-    public ToDoEntity updateTodoById(Long id, ToDoEntity todo) {
-
-        ToDoEntity existingTodo = findTodoById(id);
+        ToDoEntity existingTodo = findTodoById(todo.getId());
 
         if (existingTodo != null) {
             
             existingTodo.setTitle(todo.getTitle());
             existingTodo.setDeadline(todo.getDeadline());
-            return update(existingTodo);
+            return repo.save(existingTodo);
+            
         } else {
-            throw new IllegalArgumentException("ToDoEntity mit ID " + id + " existiert nicht.");
+            throw new IllegalArgumentException("ToDoEntity mit ID " + todo.getId() + " existiert nicht.");
         }
 
     }
 
-    public void setTitle(Long id, String title) {
-        ToDoEntity todo = repo.findById(id).orElseThrow(() -> new RuntimeException());
-        todo.setTitle(title);
-        repo.save(todo);
-    }
-
-    public void setDeadline(Long id, Date deadline) {
-        ToDoEntity todo = repo.findById(id).orElseThrow(() -> new RuntimeException());
-        todo.setDeadline(deadline);
-        repo.save(todo);
-    }
-
     public ToDoEntity create(String title, Date deadline, ToDoListEntity toDoListId) {
-
 
         ToDoEntity newToDo = new ToDoEntity();
         newToDo.setTitle(title);
@@ -80,10 +73,4 @@ public class ToDoService {
         return repo.save(newToDo);
     }
 
-    public ToDoEntity update(ToDoEntity updatedTodo) {
-        ToDoEntity existingTodo = repo.findById(updatedTodo.getId()).orElseThrow(() -> new RuntimeException());
-        existingTodo.setTitle(updatedTodo.getTitle());
-        existingTodo.setDeadline(updatedTodo.getDeadline());
-        return repo.save(existingTodo);
-    }
 }

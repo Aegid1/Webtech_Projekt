@@ -63,9 +63,7 @@ public class UserEntity implements UserDetails{
     @JoinColumn(name = "groupId")
     private GroupEntity groupId;
 
-    public UserEntity() {
-
-    }
+    public UserEntity() { }
 
     public void setId(Long id) { this.userEntityId= id; }
 
@@ -83,29 +81,17 @@ public class UserEntity implements UserDetails{
 
     public void setEmail(String email) { this.email = email; }
     
-    public String getProfilPicture() {
-        return profilPicture;
-    }
+    public String getProfilPicture() { return profilPicture; }
 
-    public void setProfilPicture(String profilPicture) {
-        this.profilPicture = profilPicture;
-    }
+    public void setProfilPicture(String profilPicture) { this.profilPicture = profilPicture; }
 
-    public String getScore() {
-        return score;
-    }
+    public String getScore() { return score; }
 
-    public void setScore(String score) {
-        this.score = score;
-    }
+    public void setScore(String score) { this.score = score; }
 
-    public Role getRole() {
-        return role;
-    }
+    public Role getRole() { return role; }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public void setRole(Role role) { this.role = role; }
 
     @Override
     public String getPassword() { return password; }

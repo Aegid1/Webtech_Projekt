@@ -26,8 +26,7 @@ public class UserController {
     public UserEntity getUser(@PathVariable String id) { return uService.findUserByID(Long.parseLong(id)); }
 
     @GetMapping("/userEmail/{email}")
-    public ResponseEntity<Map<String, Long>> getUserIdByEmail(@PathVariable String email) {  
-    
+    public ResponseEntity<Map<String, Long>> getUserIdByEmail(@PathVariable String email) { 
         return ResponseEntity.ok(uService.getUserIdByEmail(email));
     }
 }

@@ -31,6 +31,11 @@ public class GroupService {
         return userRepo.findUsersByGroupId(groupId);
     }
 
+    /*
+     * gets all scores of all users from a group in a json-format
+     * @Param Long -> id of the user that sends the request
+     * @return List<Map<String, Object>> -> List of maps, where a map represents a user containing the id, firstname and score as its keys
+     */
     public List<Map<String, Object>> getUserAndScores(Long id){
 
         List<Map<String, Object>> nameAndScore = new ArrayList<>();

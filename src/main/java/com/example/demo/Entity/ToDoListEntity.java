@@ -1,11 +1,11 @@
 package com.example.demo.Entity;
 
-//nur eine ToDoList generell oder mehrere ToDoLists möglich (für jeden Tag bspw.)
+//only one ToDoList for a group? Or should there be more lists, for different occasions
 
 import jakarta.persistence.*;
 
 @Entity
-public class ToDoListEntity{
+public class ToDoListEntity {
 
     public ToDoListEntity(Long id, String name, Long fkGroupId){
         this.toDoListId = id;
@@ -13,9 +13,7 @@ public class ToDoListEntity{
         this.fkGroupId = fkGroupId;
     }
 
-    public ToDoListEntity(){
-
-    }
+    public ToDoListEntity(){ }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,42 +25,16 @@ public class ToDoListEntity{
     @Column
     private Long fkGroupId;
 
-    // @OneToMany(fetch = FetchType.EAGER)
-    // @JoinColumn(name = "toDoId")
-    // private List<ToDoEntity> todos;
+    public Long getToDoListId() { return toDoListId; }
 
-    //public void addToDoEntity(ToDoEntity todo){ todos.add(todo); }
+    public void setToDoListId(Long toDoListId) { this.toDoListId = toDoListId; }
 
-    public Long getToDoListId() {
-        return toDoListId;
-    }
+    public String getName() { return name; }
 
-    public void setToDoListId(Long toDoListId) {
-        this.toDoListId = toDoListId;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public Long getFkGroupId() { return fkGroupId; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getFkGroupId() {
-        return fkGroupId;
-    }
-
-    public void setFkGroupId(Long fkGroupId) {
-        this.fkGroupId = fkGroupId;
-    }
-
-    // public List<ToDoEntity> getTodos() {
-        // return todos;
-    // }
-// 
-    // public void setTodos(List<ToDoEntity> todos) {
-        // this.todos = todos;
-    // }
+    public void setFkGroupId(Long fkGroupId) { this.fkGroupId = fkGroupId; }
     
 }
