@@ -1,8 +1,8 @@
 package com.example.demo.Service;
 
-import com.example.demo.Entity.ToDoListEntity;
+import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Entity.UserEntity;
-import com.example.demo.Repository.ToDoListRepository;
+import com.example.demo.Repository.GroupRepository;
 import com.example.demo.Repository.UserRepository;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class UserService {
     UserRepository repo;
 
     @Autowired
-    ToDoListRepository toDoListRepository;
+    GroupRepository groupRepository;
 
     public UserEntity saveUser(UserEntity user){ return repo.save(user); }
 
@@ -38,7 +38,7 @@ public class UserService {
 
     }
     
-    public ToDoListEntity findToDoListIdByUserId(String userId){ return toDoListRepository.findToDoListIdByUserId(Long.parseLong(userId)); }
-
+    public GroupEntity findToDoListIdByUserId(String userId){ return groupRepository.findGroupByUserId(Long.parseLong(userId)); }
+    
     public void updateScore(Long userId){ repo.changeUserScore(userId); }
 }

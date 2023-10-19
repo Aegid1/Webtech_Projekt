@@ -1,8 +1,8 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Entity.ToDoEntity;
-import com.example.demo.Entity.ToDoListEntity;
-import com.example.demo.Service.ToDoListService;
+import com.example.demo.Service.GroupService;
 import com.example.demo.Service.ToDoService;
 import com.example.demo.Service.UserService;
 
@@ -17,12 +17,11 @@ public class ToDoController {
     @Autowired
     ToDoService toDoService;
 
-    @Autowired 
-    ToDoListService toDoListService;
-
     @Autowired
     UserService uService;
 
+    @Autowired
+    GroupService groupService;
 
     /*
      * endpoint to get all todos by the userid of a user
@@ -32,8 +31,8 @@ public class ToDoController {
     @GetMapping("/alltodos/{userId}")
     public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
 
-        Long todolistId = toDoListService.getTodoListByUserId(Long.parseLong(userId));
-        List<ToDoEntity> todos = toDoService.getTodosByListId(todolistId);
+        Long groupId = groupService.findGroupIdByUserId(Long.parseLong(userId));
+        List<ToDoEntity> todos = toDoService.getTodosByGroupId(groupId);
         return ResponseEntity.ok(todos);
     }
 
@@ -60,8 +59,8 @@ public class ToDoController {
     @PostMapping("/todo/{userId}")
     public ResponseEntity<ToDoEntity> createTodo(@RequestBody ToDoEntity todo, @PathVariable String userId) {
 
-        ToDoListEntity todoListId = uService.findToDoListIdByUserId(userId);
-        return ResponseEntity.ok(toDoService.create(todo.getTitle(), todo.getDeadline(), todoListId));
+        GroupEntity group = uService.findToDoListIdByUserId(userId);
+        return ResponseEntity.ok(toDoService.create(todo.getTitle(), todo.getDeadline(), group));
     }
 
     /*

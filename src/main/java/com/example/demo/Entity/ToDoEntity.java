@@ -27,8 +27,8 @@ public class ToDoEntity {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "toDoListId")
-    private ToDoListEntity toDoList;
+    @JoinColumn(name = "groupId")
+    private GroupEntity group;
 
     public Long getId() { return toDoId; }
 
@@ -54,9 +54,9 @@ public class ToDoEntity {
 
     public void setToDoId(Long toDoId) { this.toDoId = toDoId; }
 
-    public ToDoListEntity getToDoList() { return toDoList; }
+    public GroupEntity getGroup() { return group; }
 
-    public void setToDoList(ToDoListEntity toDoList) { this.toDoList = toDoList; }
+    public void setGroup(GroupEntity group) { this.group = group; }
 
     
 }

@@ -48,7 +48,7 @@ public class ToDoControllerTest {
         todos.add(todo1);
 
         // Mock-Verhalten für den Service: Rückgabe der To-Dos basierend auf einer List-ID
-        when(toDoService.getTodosByListId(anyLong())).thenReturn(todos);
+        when(toDoService.getTodosByGroupId(anyLong())).thenReturn(todos);
 
         // Test der Controller-Methode: Abrufen der To-Dos
         mockMvc.perform(get("/alltodos/{id}", "1"))

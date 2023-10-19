@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 @Entity
 public class GroupEntity {
     
+    public GroupEntity(int memberCount, ){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long groupId;
@@ -13,7 +17,7 @@ public class GroupEntity {
 
     // in what way necessary, is going to be shown during the project
     @Column
-    private Integer countOfMembers;
+    private int countOfMembers;
 
     //maybe byte[] instead of String
     @Column
@@ -23,7 +27,14 @@ public class GroupEntity {
     @Column
     private String scoreSum;
 
+    @Column
+    private boolean locationPermission;
+
     private Long fkToDoListId;
+
+
+    
+    public void setLocationPermission(Boolean permission){ this.locationPermission = permission; }
 
     public Long getGroupId() { return groupId; }
 

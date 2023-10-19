@@ -72,10 +72,11 @@ public class WebSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://aegid1.github.io")); 
+//Hier muss gegen Ende localhost:3001 rausgenommen werden
+        configuration.setAllowedOrigins(List.of("https://aegid1.github.io", "http://localhost:3001")); 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-}
+}                                                       

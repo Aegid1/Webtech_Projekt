@@ -56,4 +56,8 @@ public class GroupService {
 
     public Long findGroupIdByUserId(Long userId){ return userRepo.findGroupIdByUserId(userId); }
 
+    public GroupEntity saveGroup (GroupEntity group){ return repo.save(group); }
+
+    public GroupEntity findGroupById(Long id){ return repo.findById(id).orElseThrow(() -> new RuntimeException()); }
+
 }

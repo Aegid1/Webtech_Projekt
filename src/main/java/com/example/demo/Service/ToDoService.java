@@ -1,8 +1,8 @@
 package com.example.demo.Service;
 
 import com.example.demo.Repository.ToDoRepository;
+import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Entity.ToDoEntity;
-import com.example.demo.Entity.ToDoListEntity;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -22,9 +22,9 @@ public class ToDoService {
      * @param Long -> the id of the todolist
      * @return List<ToDoEntity> -> a list containing all todos 
      */
-    public List<ToDoEntity> getTodosByListId(Long todoListId) {
+    public List<ToDoEntity> getTodosByGroupId(Long groupId) {
 
-        List<ToDoEntity> todos = repo.findByToDoListId(todoListId);
+        List<ToDoEntity> todos = repo.findByToDoListId(groupId);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         for (ToDoEntity todo : todos) {
@@ -62,12 +62,12 @@ public class ToDoService {
 
     }
 
-    public ToDoEntity create(String title, Date deadline, ToDoListEntity toDoListId) {
+    public ToDoEntity create(String title, Date deadline, GroupEntity group) {
 
         ToDoEntity newToDo = new ToDoEntity();
         newToDo.setTitle(title);
         newToDo.setDeadline(deadline);
-        newToDo.setToDoList(toDoListId);
+        newToDo.setGroup(group);
         newToDo.setEditMode(false);
         
         return repo.save(newToDo);
