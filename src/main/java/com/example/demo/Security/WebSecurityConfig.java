@@ -32,30 +32,26 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http
-                .csrf()
-                .disable()
-                .cors()
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers(new AntPathRequestMatcher("/db-console/**"),
-                        new AntPathRequestMatcher("/todo/**"),
-                        new AntPathRequestMatcher("/register"),
-                        new AntPathRequestMatcher("/authentication"),
-                        new AntPathRequestMatcher("/getGroup/**"),
-                        new AntPathRequestMatcher("/userEmail/**"),
-                        new AntPathRequestMatcher("/alltodos/**"),
-                        new AntPathRequestMatcher("/todo/**"),
-                        new AntPathRequestMatcher("/delete/**"),
-                        new AntPathRequestMatcher("/updateScore/**")
-                                                        
-                        )
-            .permitAll()
-            .anyRequest()
-            .authenticated()
+            .csrf()
+            .disable()
+            .cors()
             .and()
-                .formLogin()
-                .defaultSuccessUrl("/") // Hier die gewünschte Weiterleitungs-URL nach erfolgreicher Authentifizierung angeben
-                .and()
+            .formLogin()
+            .disable() 
+            .authorizeHttpRequests()
+            .requestMatchers(new AntPathRequestMatcher("/db-console/**"),
+                    new AntPathRequestMatcher("/todo/**", "GET"),
+                    new AntPathRequestMatcher("/register", "POST"),
+                    new AntPathRequestMatcher("/authentication/**", "POST"),
+                    new AntPathRequestMatcher("/getGroup/**"),
+                    new AntPathRequestMatcher("/userEmail/**"),
+                    new AntPathRequestMatcher("/todo/**"),
+                    new AntPathRequestMatcher("/delete/**"),
+                    new AntPathRequestMatcher("/updateScore/**"),
+                    new AntPathRequestMatcher("/alltodos/**", "GET")
+                                                    
+            ).permitAll()
+            .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
@@ -73,7 +69,7 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
 //Hier muss gegen Ende localhost:3001 rausgenommen werden
-        configuration.setAllowedOrigins(List.of("https://aegid1.github.io", "http://localhost:3001")); 
+        configuration.setAllowedOrigins(List.of("http://localhost:3001", "http://localhost:8080")); 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         source.registerCorsConfiguration("/**", configuration);

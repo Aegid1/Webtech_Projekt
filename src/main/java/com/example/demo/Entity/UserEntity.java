@@ -58,7 +58,6 @@ public class UserEntity implements UserDetails{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "groupId")
     private GroupEntity groupId;

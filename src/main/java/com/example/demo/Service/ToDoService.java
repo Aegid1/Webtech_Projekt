@@ -1,6 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.Repository.ToDoRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Entity.ToDoEntity;
 
@@ -18,21 +21,21 @@ public class ToDoService {
     ToDoRepository repo;
 
     /*
-     * gets all todos by the todolistid and converts the format of the date into YYYY-MM-DD
+     * gets all todos by the groupId and converts the format of the date into YYYY-MM-DD
      * @param Long -> the id of the todolist
      * @return List<ToDoEntity> -> a list containing all todos 
      */
     public List<ToDoEntity> getTodosByGroupId(Long groupId) {
 
-        List<ToDoEntity> todos = repo.findByToDoListId(groupId);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        for (ToDoEntity todo : todos) {
-
-            Date date = todo.getDeadline();
-            String formattedDate = formatter.format(date);
-            todo.setDate(formattedDate);
-        }
+        List<ToDoEntity> todos = repo.findByGroupId(groupId);
+        // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+// 
+        // for (ToDoEntity todo : todos) {
+// 
+            // Date date = todo.getDeadline();
+            // String formattedDate = formatter.format(date);
+            // todo.setDeadline(formattedDate);
+        // }
 
         return todos;
     }
@@ -46,6 +49,7 @@ public class ToDoService {
      * @param ToDoEntity -> the new todo with the new information
      * @return ToDoEntity -> the updated todo
      */
+    @Transactional
     public ToDoEntity updateTodoById(ToDoEntity todo) {
 
         ToDoEntity existingTodo = findTodoById(todo.getId());

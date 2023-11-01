@@ -4,10 +4,17 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class ToDoEntity {
+
+    public ToDoEntity(){ }
+    
+    public ToDoEntity(Object toDoId, Object deadline,  Object editMode, Object title){
+        this.toDoId = (Long) (toDoId);
+        this.deadline = Date.valueOf(deadline.toString());
+        this.editMode = (boolean) editMode;
+        this.title = String.valueOf(title);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +32,9 @@ public class ToDoEntity {
     @Transient
     private String date;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "groupId")
-    private GroupEntity group;
+    private GroupEntity groupId;
 
     public Long getId() { return toDoId; }
 
@@ -46,17 +52,13 @@ public class ToDoEntity {
 
     public void setDeadline(Date deadline) { this.deadline = deadline; }
 
-    public String getDate() { return date; }
-
-    public void setDate(String date) { this.date = date; }
-
     public Long getToDoId() { return toDoId; }
 
     public void setToDoId(Long toDoId) { this.toDoId = toDoId; }
 
-    public GroupEntity getGroup() { return group; }
+    public GroupEntity getGroup() { return groupId; }
 
-    public void setGroup(GroupEntity group) { this.group = group; }
+    public void setGroup(GroupEntity group) { this.groupId = group; }
 
     
 }

@@ -4,10 +4,18 @@ import jakarta.persistence.*;
 @Entity
 public class GroupEntity {
     
-    public GroupEntity(int memberCount, ){
+    public GroupEntity(int memberCount, String name, String profilePicture, String scoreSum, boolean permission){
+
+        this.countOfMembers = memberCount;
+        this.name = name;
+        this.profilePicture = profilePicture;
+        this.scoreSum = scoreSum;
+        this.locationPermission = permission;
 
     }
 
+    public GroupEntity(){ }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long groupId;
@@ -29,12 +37,10 @@ public class GroupEntity {
 
     @Column
     private boolean locationPermission;
-
-    private Long fkToDoListId;
-
-
     
     public void setLocationPermission(Boolean permission){ this.locationPermission = permission; }
+
+    public boolean getLocationPermission(){ return locationPermission; }
 
     public Long getGroupId() { return groupId; }
 
@@ -55,9 +61,5 @@ public class GroupEntity {
     public String getScoreSum() { return scoreSum; }
 
     public void setScoreSum(String scoreSum) { this.scoreSum = scoreSum; }
-
-    public Long getFkToDoListId() { return fkToDoListId; }
-
-    public void setFkToDoListId(Long fkToDoListId) { this.fkToDoListId = fkToDoListId; }
     
 }

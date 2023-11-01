@@ -28,19 +28,24 @@ public class ToDoController {
      * @Param String -> the userid
      * @return ResponseEntity<List<ToDoEntity>> -> a list containing all todos of a user
      */
-    @GetMapping("/alltodos/{userId}")
-    public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
+    // @GetMapping("alltodos/{userId}")
+    // public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
+// 
+        // Long groupId = groupService.findGroupIdByUserId(Long.parseLong(userId));
+        // List<ToDoEntity> todos = toDoService.getTodosByGroupId(groupId);
+        // return ResponseEntity.ok(todos);
+    // }
 
-        Long groupId = groupService.findGroupIdByUserId(Long.parseLong(userId));
-        List<ToDoEntity> todos = toDoService.getTodosByGroupId(groupId);
-        return ResponseEntity.ok(todos);
+    @GetMapping("alltodos/{userId}")
+    public ResponseEntity<List<ToDoEntity>> getTodosByUserId(@PathVariable String userId){
+
+        return ResponseEntity.ok(uService.getTodosByUserId(Long.parseLong(userId)));
     }
 
-
     @GetMapping("todo/{id}")
-    public ToDoEntity getTodo(@PathVariable String id) {
+    public ResponseEntity<ToDoEntity> getTodo(@PathVariable String id) {
 
-        return toDoService.findTodoById(Long.parseLong(id));
+        return ResponseEntity.ok(toDoService.findTodoById(Long.parseLong(id)));
     }
     
     @DeleteMapping("delete/{id}")

@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Service.GroupService;
+import com.example.demo.Service.UserService;
 
 @RestController
 public class GroupController {
     
-    @Autowired GroupService groupService;
+    @Autowired 
+    GroupService groupService;
+
+    @Autowired 
+    UserService userServie;
     
     @GetMapping("/getGroup/{id}")
     public ResponseEntity<List<Map<String, Object>>> getToDos(@PathVariable String id) { 
@@ -25,11 +30,13 @@ public class GroupController {
         return ResponseEntity.ok(groupService.getUserAndScores(Long.parseLong(id)));
     }
 
-    @PostMapping("/createGroup")
-    public ResponseEntity<GroupEntity> createGroup(@RequestBody GroupEntity group){
+    @PostMapping("/createGroup/{id}")
+    public ResponseEntity<GroupEntity> createGroup(@RequestBody GroupEntity groupData, @PathVariable String id){
         //hier noch beim user den foreign key hinzufügen
-        //hier noch todoList erstellen
-        return ResponseEntity.ok(groupService.createGroup(group));
-    }
+        GroupEntity group = groupService.createGroup(groupData);
+        userServie.updateGroupId(group.getGroupId(), Long.parseLong(id));
 
+        return ResponseEntity.ok(group);
+
+    }
 }

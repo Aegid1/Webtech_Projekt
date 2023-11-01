@@ -13,6 +13,8 @@ import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repository.GroupRepository;
 import com.example.demo.Repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class GroupService {
 
@@ -26,6 +28,7 @@ public class GroupService {
     
     public void deleteGroup(GroupEntity group){ repo.delete(group); }
 
+    @Transactional
     public List<UserEntity> findGroupId(Long userId) {
         Long groupId = findGroupIdByUserId(userId);
         return userRepo.findUsersByGroupId(groupId);
@@ -36,6 +39,7 @@ public class GroupService {
      * @Param Long -> id of the user that sends the request
      * @return List<Map<String, Object>> -> List of maps, where a map represents a user containing the id, firstname and score as its keys
      */
+    @Transactional
     public List<Map<String, Object>> getUserAndScores(Long id){
 
         List<Map<String, Object>> nameAndScore = new ArrayList<>();

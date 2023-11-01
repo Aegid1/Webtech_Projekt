@@ -65,7 +65,7 @@ public class ToDoControllerTest {
         ToDoEntity todo = new ToDoEntity();
         todo.setId(1L);
         todo.setTitle("ToDo 1");
-        todo.setDate("2023-07-04");
+        todo.setDeadline(Date.valueOf("2023-07-04"));
 
         // Mock-Verhalten für den Service: Rückgabe eines einzelnen To-Dos basierend auf einer ID
         when(toDoService.findTodoById(anyLong())).thenReturn(todo);

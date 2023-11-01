@@ -1,11 +1,14 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entity.GroupEntity;
+import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.UserEntity;
 import com.example.demo.Repository.GroupRepository;
 import com.example.demo.Repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,24 @@ public class UserService {
     @Autowired
     GroupRepository groupRepository;
 
+    public void updateGroupId(Long groupId, Long userId){
+        repo.changeGroupId(groupId, userId);
+    }
+
+    public List<ToDoEntity> getTodosByUserId(Long userId){
+        
+        List<List<Object>> todosSplitted = repo.findTodosByUserId(userId);
+        List<ToDoEntity> todos = new ArrayList<>();
+
+        for (List<Object> todoSplitted : todosSplitted) {
+
+            ToDoEntity todo = new ToDoEntity(todoSplitted.get(0), todoSplitted.get(1), todoSplitted.get(2), todoSplitted.get(3));
+            todos.add(todo);
+        }
+
+        return todos;
+    }
+
     public UserEntity saveUser(UserEntity user){ return repo.save(user); }
 
     public void deleteUser(UserEntity user){ repo.delete(user); }
@@ -32,6 +53,7 @@ public class UserService {
 
         Map<String, Long> response = new HashMap<>();
         Long userId = repo.findIdByEmail(email); 
+        System.out.println(userId);
         response.put("Id", userId);
 
         return response;
