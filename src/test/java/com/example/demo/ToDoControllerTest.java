@@ -3,6 +3,8 @@ package com.example.demo;
 import com.example.demo.Controller.ToDoController;
 import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Service.ToDoService;
+import com.example.demo.Service.UserService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -27,6 +29,9 @@ public class ToDoControllerTest {
     @Mock
     private ToDoService toDoService;
 
+    @Mock
+    private UserService uService;
+
     @InjectMocks
     private ToDoController toDoController;
 
@@ -45,18 +50,20 @@ public class ToDoControllerTest {
         todo1.setId(1L);
         todo1.setTitle("ToDo 1");
         todo1.setDeadline(Date.valueOf("2023-07-04"));
+        todo1.setEditMode(false);
         todos.add(todo1);
 
         // Mock-Verhalten für den Service: Rückgabe der To-Dos basierend auf einer List-ID
-        when(toDoService.getTodosByGroupId(anyLong())).thenReturn(todos);
+        when(uService.getTodosByUserId(1L)).thenReturn(todos);
 
-        // Test der Controller-Methode: Abrufen der To-Dos
+        // Test der Controller-Methode: Abrufen der To-DosSELECT * FROM TO_DO_ENTITY 
         mockMvc.perform(get("/alltodos/{id}", "1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].title").value("ToDo 1"))
-                .andExpect(jsonPath("$[0].date").value("2023-07-04"));
+                .andExpect(jsonPath("$[0].editMode").value(false))
+                .andExpect(jsonPath("$[0].deadline").value(1688421600000L));
     }
 
     @Test
@@ -76,7 +83,7 @@ public class ToDoControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.title").value("ToDo 1"))
-                .andExpect(jsonPath("$.date").value("2023-07-04"));
+                .andExpect(jsonPath("$.deadline").value(1688421600000L));
     }
 
     // Test der Controller-Methode: Löschen eines To-Dos

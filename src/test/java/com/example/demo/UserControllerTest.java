@@ -30,7 +30,8 @@ public class UserControllerTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        
+        MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
@@ -51,7 +52,7 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("johndoe@example.com"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").doesNotExist());
     }
-
+    
     @Test
     // Testet das Abrufen eines Benutzers durch den UserController anhand der ID
     public void testGetUser() throws Exception {

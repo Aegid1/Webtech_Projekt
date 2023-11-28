@@ -23,19 +23,6 @@ public class ToDoController {
     @Autowired
     GroupService groupService;
 
-    /*
-     * endpoint to get all todos by the userid of a user
-     * @Param String -> the userid
-     * @return ResponseEntity<List<ToDoEntity>> -> a list containing all todos of a user
-     */
-    // @GetMapping("alltodos/{userId}")
-    // public ResponseEntity<List<ToDoEntity>> getToDos(@PathVariable String userId) {
-// 
-        // Long groupId = groupService.findGroupIdByUserId(Long.parseLong(userId));
-        // List<ToDoEntity> todos = toDoService.getTodosByGroupId(groupId);
-        // return ResponseEntity.ok(todos);
-    // }
-
     @GetMapping("alltodos/{userId}")
     public ResponseEntity<List<ToDoEntity>> getTodosByUserId(@PathVariable String userId){
 

@@ -1,5 +1,4 @@
 package com.example.demo.Repository;
-import com.example.demo.Entity.ToDoEntity;
 import com.example.demo.Entity.UserEntity;
 
 import java.util.List;
@@ -29,6 +28,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Query(value = "UPDATE user_entity SET user_entity.score = user_entity.score + 5 WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
     void changeUserScore(@Param("userId")Long userId);
 
+    @Modifying
     @Query(value = "UPDATE user_entity SET user_entity.group_id = :groupId WHERE user_entity.user_entity_id = :userId", nativeQuery = true)
     void changeGroupId(@Param("groupId")Long groupId, @Param("userId")Long userId);
 

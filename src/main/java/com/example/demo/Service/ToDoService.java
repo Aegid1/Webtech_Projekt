@@ -8,7 +8,6 @@ import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Entity.ToDoEntity;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -15,6 +15,7 @@ import com.example.demo.Entity.GroupEntity;
 import com.example.demo.Service.GroupService;
 import com.example.demo.Service.UserService;
 
+
 @RestController
 public class GroupController {
     
@@ -32,11 +33,8 @@ public class GroupController {
 
     @PostMapping("/createGroup/{id}")
     public ResponseEntity<GroupEntity> createGroup(@RequestBody GroupEntity groupData, @PathVariable String id){
-        //hier noch beim user den foreign key hinzufügen
-        GroupEntity group = groupService.createGroup(groupData);
-        userServie.updateGroupId(group.getGroupId(), Long.parseLong(id));
-
-        return ResponseEntity.ok(group);
+       
+        return ResponseEntity.ok(groupService.createGroup(groupData, id));
 
     }
 }

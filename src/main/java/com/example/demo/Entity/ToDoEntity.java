@@ -29,9 +29,6 @@ public class ToDoEntity {
     @Column
     private Date deadline;
 
-    @Transient
-    private String date;
-
     @ManyToOne
     @JoinColumn(name = "groupId")
     private GroupEntity groupId;

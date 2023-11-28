@@ -48,7 +48,8 @@ public class WebSecurityConfig {
                     new AntPathRequestMatcher("/todo/**"),
                     new AntPathRequestMatcher("/delete/**"),
                     new AntPathRequestMatcher("/updateScore/**"),
-                    new AntPathRequestMatcher("/alltodos/**", "GET")
+                    new AntPathRequestMatcher("/alltodos/**", "GET"),
+                    new AntPathRequestMatcher("/createGroup/**", "POST")
                                                     
             ).permitAll()
             .and()

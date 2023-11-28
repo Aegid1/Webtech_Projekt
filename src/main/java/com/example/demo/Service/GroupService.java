@@ -24,7 +24,14 @@ public class GroupService {
     @Autowired
     UserRepository userRepo;
 
-    public GroupEntity createGroup(GroupEntity group) { return repo.save(group); }
+    @Transactional
+    public GroupEntity createGroup(GroupEntity group, String id) { 
+
+        repo.save(group);
+        userRepo.changeGroupId(group.getGroupId(), Long.parseLong(id));
+        return group;
+
+    }
     
     public void deleteGroup(GroupEntity group){ repo.delete(group); }
 
